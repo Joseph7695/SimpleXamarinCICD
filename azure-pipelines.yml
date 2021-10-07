@@ -25,6 +25,17 @@ steps:
     projects: '**/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    runOnlyImpactedTests: true
+    runTestsInIsolation: true
+    codeCoverageEnabled: true
 - task: XamarinAndroid@1
   inputs:
     projectFile: '**/*droid*.csproj'
